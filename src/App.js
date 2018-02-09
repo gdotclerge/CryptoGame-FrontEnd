@@ -1,21 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import TickerContainer from './components/ticker/TickerContainer';
+import Login from "./components/login/Login"
+import SignUp from "./components/login/SignUp"
 import './App.css';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 class App extends Component {
+  state = {
+    user: ""
+  }
+
+
+  componentDidMount = () => {
+
+  }
+
+  handleLoginSubmit = (e) => {
+    e.preventDefault();
+    let username = e.target.children[0].value
+    let password = e.target.children[1].value
+    debugger
+  }
+
+  handleSignUpSubmit = (e) => {
+
+  }
+
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <Switch>
+          <Route path="/login" render={(routerProps)=> {return <Login handleLoginSubmit={this.handleLoginSubmit} /> }} />
+          <Route path="/signup" render={(routerProps)=> {return <SignUp handleSignUpSubmit={this.handleSignUpSubmit} />}} />
+          <Route path="/tickers" component={TickerContainer} />
+          <Route path="/" />
+        </Switch>
     );
   }
+
+
+
+
+
 }
 
-export default App;
+export default withRouter(App);
