@@ -6,9 +6,15 @@ class Adapter {
 
 
 // TICKER FETCH REQUESTS
-  getTickerIDs = (tickerID) => {
+  static getTickersInit = () => {
     return fetch(`http://localhost:3001/api/v1/tickers`)
     .then(resp => resp.json())
+  }
+
+  static getTickerInfo = (search_term) => {
+    return fetch(`https://api.coinmarketcap.com/v1/ticker/${search_term}/`)
+    .then(resp => resp.json())
+    .then(json => json[0])
   }
 
   static getTopTenTickers = () => {
