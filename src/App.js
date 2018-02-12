@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import TickerContainer from './components/ticker/TickerContainer';
 import Adapter from './adapter';
-import Login from "./components/login/Login"
+import Login from "./components/login/LogInContainer"
 import Auth from "./authAdapter"
-import Home from "./components/Home"
+import Home from "./components/home/HomeContainer"
 // import SignUp from "./components/login/SignUp"
 import './App.css';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
@@ -25,13 +25,15 @@ class App extends Component {
                user: user
              })
            }
-         }).then(Adapter.getTickersInit()
-             .then(json => {
-               this.setState({
-                 tickers: json
-               })}
-             ))
+         })
      }
+
+     Adapter.getTickersInit()
+       .then(json => {
+         this.setState({
+           tickers: json
+         })}
+       )
   }
 
   createTickerPaths = () => {
@@ -85,7 +87,7 @@ class App extends Component {
         } />
       <Route exact path="/login" render={()=>
         {
-          return this.state.userIsLoggedIn ? <Redirect to="/home" /> : <Login handleLoginSubmit={this.handleLoginSubmit} />
+          return this.state.userIsLoggedIn ? <Redirect to="/home" /> : <Login handleLoginSubmit={this.handleLoginSubmit} tickers={this.state.tickers} />
         }
         }/>
         </Switch>

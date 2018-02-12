@@ -1,6 +1,6 @@
 import React from 'react'
 
-const home = (props) => {
+const homePortfolio = (props) => {
 
 
 
@@ -14,4 +14,4 @@ const home = (props) => {
 
 }
 
-export default home
+export default homePortfolio

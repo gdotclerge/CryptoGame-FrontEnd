@@ -1,16 +1,16 @@
 import React from 'react'
 
-const login = (props) => {
+const signUp = (props) => {
 
 
 
   return (
     <div>
-      Login
-      <form onSubmit={props.handleLoginSubmit}>
+      Sign Up
+      <form onSubmit={props.handleSignUpSubmit}>
         <input type='text' placeholder='username'/>
         <input type='password' placeholder='password'/>
-        <input type='submit' value='Login'/>
+        <input type='submit' value='SignUp'/>
       </form>
     </div>
   )
@@ -19,4 +19,4 @@ const login = (props) => {
 
 }
 
-export default login
+export default signUp
