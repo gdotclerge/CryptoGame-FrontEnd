@@ -42,7 +42,7 @@ class App extends Component {
       const pathKey = `Path-ID-${t.id}`
       return <Route exact path={pathName} key={pathKey} render={(routerProps)=> {
         return this.state.userIsLoggedIn ?
-        <TickerContainer ticker={t} key={t.id} user={this.state.user}/> : <Redirect to="/login"/>
+        <TickerContainer ticker={t} key={t.id} user={this.state.user} refreshUser={this.refreshUser}/> : <Redirect to="/login"/>
         }} />
     })
   }
@@ -51,7 +51,7 @@ class App extends Component {
   handleLoginSubmit = (e) => {
     e.preventDefault();
     let username = e.target.children[0].value
-    let password = e.target.children[1].value
+    let password = e.target.children[2].value
     this.logIn({username: username, password: password})
   }
 
@@ -104,7 +104,12 @@ class App extends Component {
       })
   }
 
-
+  refreshUser = (user) => {
+    if (!user.error) {
+      this.setState({
+        user: user
+      })
+  }}
 
   render() {
     console.log("rendered")

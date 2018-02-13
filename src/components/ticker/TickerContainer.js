@@ -31,7 +31,7 @@ class TickerContainer extends React.Component {
         {console.log(this.state.tickerInfo)}
         {console.log(this.props.ticker)}
         <TickerInfo tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo}/>
-        <TickerPurchase tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user}/>
+        <TickerPurchase tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user} refreshUser={this.props.refreshUser}/>
       </div>
     )
   }

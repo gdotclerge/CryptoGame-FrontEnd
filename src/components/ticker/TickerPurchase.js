@@ -25,7 +25,7 @@ class tickerPurchase extends React.Component {
       console.log(newPortfolio)
       Adapter.postNewPortfolio(newPortfolio)
       .then(
-        console.log
+        user => this.props.refreshUser(user)
       )
     }
   }
