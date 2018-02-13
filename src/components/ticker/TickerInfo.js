@@ -6,9 +6,9 @@ const tickerInfo = (props) => {
 
   return (
     <div>
-    {props.ticker.name}<br/>
-    {props.ticker.symbol}<br/>
-    {props.ticker.price_usd}<br/>
+    {props.tickerInfo.name}<br/>
+    {props.tickerInfo.symbol}<br/>
+    {props.tickerInfo.price_usd}<br/>
     </div>
   )
 

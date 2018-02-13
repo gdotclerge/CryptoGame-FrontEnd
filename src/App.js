@@ -40,7 +40,10 @@ class App extends Component {
     return this.state.tickers.map( (t)=>  {
       const pathName = `/${t.symbol}`
       const pathKey = `Path-ID-${t.id}`
-      return <Route exact path={pathName} key={pathKey} render={(routerProps)=> ( <TickerContainer ticker={t} key={t.id}/>)} />
+      return <Route exact path={pathName} key={pathKey} render={(routerProps)=> {
+        return this.state.userIsLoggedIn ?
+        <TickerContainer ticker={t} key={t.id} user={this.state.user}/> : <Redirect to="/login"/>
+        }} />
     })
   }
 
