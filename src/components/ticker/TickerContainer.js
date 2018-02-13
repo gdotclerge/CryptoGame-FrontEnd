@@ -1,12 +1,16 @@
 import React from 'react'
 import Adapter from '../../adapter';
 import TickerInfo from './TickerInfo';
+import TickerPortfolioInfo from './TickerPortfolioInfo';
 import TickerPurchase from './TickerPurchase';
 
 
 class TickerContainer extends React.Component {
   state = {
-    tickerInfo: {}
+    tickerInfo: {},
+    inUserPortfolio: false,
+    portfolios: [],
+    bodyType: "purchase"
   }
 
 
@@ -22,6 +26,16 @@ class TickerContainer extends React.Component {
   componentDidMount = () => {
     this.setTicker();
     setInterval(this.setTicker, 7000)
+
+    if (this.props.user.portfolios.map(p => p.ticker_id).includes(this.props.ticker.id)) {
+      const portfolios = this.props.user.portfolios.map(p => (p.ticker_id === this.props.ticker.id ? p : null))
+      this.setState({
+        inUserPortfolio: true,
+        portfolios: portfolios
+      })
+    }
+
+
   }
 
 
@@ -30,7 +44,9 @@ class TickerContainer extends React.Component {
       <div>
         {console.log(this.state.tickerInfo)}
         {console.log(this.props.ticker)}
-        <TickerInfo tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo}/>
+        {this.state.inUserPortfolio ? <TickerPortfolioInfo tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo}/>
+        :
+        <TickerInfo tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo}/>}
         <TickerPurchase tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user} refreshUser={this.props.refreshUser}/>
       </div>
     )

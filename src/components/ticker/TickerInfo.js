@@ -2,16 +2,14 @@ import React from 'react'
 
 const tickerInfo = (props) => {
 
-
-
   return (
     <div>
-    {props.tickerInfo.name}<br/>
-    {props.tickerInfo.symbol}<br/>
-    {props.tickerInfo.price_usd}<br/>
+    <h3>{props.tickerInfo.name}</h3>
+    <h4>{props.tickerInfo.symbol}</h4>
+    <p>Value: {props.tickerInfo.price_usd} USD/Coin</p>
+    ----------------------<br /><br />
     </div>
   )
-
 
 
 }
