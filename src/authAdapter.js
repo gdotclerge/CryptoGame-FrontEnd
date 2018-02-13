@@ -9,6 +9,14 @@ export default class AuthAdapter {
     }).then(res => res.json())
   }
 
+  static signUp (signUpParams) {
+    return fetch(`${baseUrl}/signup`, {
+      method: 'POST',
+      headers: signUpHeaders(),
+      body: JSON.stringify({user: signUpParams})
+    }).then(res => res.json())
+  }
+
   static currentUser () {
     return fetch(`${baseUrl}/current_user`, {
       headers: headers()
@@ -16,10 +24,19 @@ export default class AuthAdapter {
   }
 }
 
+
+
 function headers () {
   return {
     'content-type': 'application/json',
     'accept': 'application/json',
     'Authorization': localStorage.getItem('jwt')
+  }
+}
+
+function signUpHeaders () {
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
   }
 }

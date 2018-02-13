@@ -69,31 +69,66 @@ class App extends Component {
   }
 
 
-  handleSignUpSubmit = (e) => {
+  logOutButton = () => {
+    if(this.state.userIsLoggedIn){
+      return(<button onClick={this.handleLogOut}>LogOut</button>)
+    }
+  }
 
+  handleLogOut = () => {
+    localStorage.removeItem('jwt')
+    this.setState({ isLoggedIn: false, user: {} }, ()=> console.log(this.state.isLoggedIn))
+  }
+
+
+  handleSignUpSubmit = (e) => {
+    e.preventDefault();
+    let username = e.target.children[0].value
+    let firstName = e.target.children[2].value
+    let lastName = e.target.children[4].value
+    let password = e.target.children[6].value
+    let password_confirmation = e.target.children[8].value
+    this.signUp({username, firstName, lastName, password, password_confirmation})
+  }
+
+  signUp = (signUpParams) => {
+    Auth.signUp(signUpParams)
+      .then( user => {
+        if (!user.error) {
+          this.setState({
+            userIsLoggedIn: true,
+            user: user
+          })
+          localStorage.setItem('jwt', user.jwt )
+        }
+      })
   }
 
 
 
   render() {
+    console.log("rendered")
     return (
-      <Switch>
-      {this.createTickerPaths()}
+      <div>
+        {this.logOutButton()}
+        <Switch>
+          {this.createTickerPaths()}
 
-      <Route exact path='/' render={()=>
-        {
-          return this.state.userIsLoggedIn ? <Redirect to="/home"/> : <Redirect to="/login"/>}
-        } />
-      <Route exact path='/home' render={()=>
-        {
-          return this.state.userIsLoggedIn ? <Home /> : <Redirect to="/login"/>}
-        } />
-      <Route exact path="/login" render={()=>
-        {
-          return this.state.userIsLoggedIn ? <Redirect to="/home" /> : <Login handleLoginSubmit={this.handleLoginSubmit} tickers={this.state.tickers} />
-        }
-        }/>
+          <Route exact path='/' render={()=>
+            {
+              return this.state.userIsLoggedIn ? <Redirect to="/home"/> : <Redirect to="/login"/>}
+            } />
+          <Route exact path='/home' render={()=>
+            {
+              return this.state.userIsLoggedIn ? <Home /> : <Redirect to="/login"/>}
+            } />
+          <Route exact path="/login" render={()=>
+            {
+              return this.state.userIsLoggedIn ? <Redirect to="/home" /> : <Login handleLoginSubmit={this.handleLoginSubmit} tickers={this.state.tickers} handleSignUpSubmit={this.handleSignUpSubmit} />
+            }
+            } />
         </Switch>
+      </div>
     );
   }
 
