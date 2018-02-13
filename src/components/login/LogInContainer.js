@@ -10,7 +10,7 @@ const login = (props) => {
 
   return (
     <div>
-      <LogInHeader />
+      <LogInHeader handleLoginSubmit={props.handleLoginSubmit}/>
       <LogInBody tickers={props.tickers} />
     </div>
   )
