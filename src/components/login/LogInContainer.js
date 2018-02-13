@@ -4,19 +4,47 @@ import LogInHeader from './LogInHeader'
 import SignUpHeader from './SignUpHeader'
 
 
-const login = (props) => {
+class Login extends React.Component {
+  state = {
+    signUp: false
+  }
 
 
+  loginHeaderHandler = () => {
+    if (this.state.signUp){
+      return (<SignUpHeader handleSignUpSubmit={this.props.handleSignUpSubmit} handleLogInClick={this.handleLogInClick}/>)
+    }
+    else {
+      return (<LogInHeader handleLoginSubmit={this.props.handleLoginSubmit} handleSignUpClick={this.handleSignUpClick}/>)
+    }
+  }
 
-  return (
-    <div>
-      <LogInHeader handleLoginSubmit={props.handleLoginSubmit}/>
-      <LogInBody tickers={props.tickers} />
-    </div>
-  )
 
+  handleSignUpClick = () => {
+    this.setState({
+      signUp: true
+    })
+  }
+
+  handleLogInClick = () => {
+    this.setState({
+      signUp: false
+    })
+  }
+
+
+  render(){
+    return (
+      <div>
+        {this.loginHeaderHandler()}
+        <LogInBody tickers={this.props.tickers} />
+      </div>
+    )
+  }
 
 
 }
 
-export default login
+
+
+export default Login
