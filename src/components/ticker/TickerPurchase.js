@@ -1,10 +1,10 @@
 import React from 'react'
 import Adapter from '../../adapter'
 
-class tickerPurchase extends React.Component {
+class TickerPurchase extends React.Component {
 
   state = {
-    purchaseQty: null
+    purchaseQty: 0
   }
 
   setPurchaseQty = (e) => {
@@ -14,34 +14,43 @@ class tickerPurchase extends React.Component {
   }
 
   purchaseCrypto = (e) => {
-    const purchasePrice = -(this.state.purchaseQty * this.props.tickerInfo.price_usd).toFixed(2)
-    if ((this.props.user.unspent_money + purchasePrice) > 0) {
+    const purchaseCost = -(this.state.purchaseQty * this.props.tickerInfo.price_usd).toFixed(2)
+    if ((this.props.user.unspent_money + purchaseCost) > 0) {
       const newPortfolio = {
         user_id: this.props.user.id,
         ticker_id: this.props.tickerBackEnd.id,
         purchase_amount: this.state.purchaseQty,
-        purchase_price: this.props.tickerInfo.price_usd
+        purchase_price: (this.props.tickerInfo.price_usd * this.state.purchaseQty)
       }
       console.log(newPortfolio)
-
       Adapter.postNewPortfolio(newPortfolio)
       .then(
-        console.log
+        user => this.props.refreshUser(user)
+      ).then(
+        this.setState({
+          purchaseQty: 0
+        })
       )
     }
   }
 
   render() {
-    const purchasePrice = -(this.state.purchaseQty * this.props.tickerInfo.price_usd).toFixed(2)
+    const purchaseCost = -(this.state.purchaseQty * this.props.tickerInfo.price_usd).toFixed(2)
     return (<div>
-      Ammount: <input type='number' onChange={this.setPurchaseQty}/><br/>
-      x {this.props.tickerInfo.price_usd} USD<br/>
-      _<br/>
-      {purchasePrice} USD<br/>
-      {this.props.user.unspent_money.toFixed(2)} USD<br/>
-      _ <br/>
-      {(this.props.user.unspent_money + purchasePrice).toFixed(2)} USD<br/>
-      <button onClick={this.purchaseCrypto}>Buy</button><br/>
+
+      <p>How much {this.props.tickerInfo.name} would you like to Buy?</p>
+
+      <p><input type='number' value={this.state.purchaseQty} onChange={this.setPurchaseQty}/></p>
+
+      <p>@ ${this.props.tickerInfo.price_usd} USD<br/>
+      will currently cost:</p>
+
+      <h4>${-purchaseCost} USD</h4>
+
+      <p>You have: ${this.props.user.unspent_money.toFixed(2)} USD<br/>
+      This will leave you with: ${(this.props.user.unspent_money + purchaseCost).toFixed(2)} USD</p>
+
+      <button onClick={this.purchaseCrypto}>Buy</button>
     </div>)
   }
 
@@ -49,4 +58,4 @@ class tickerPurchase extends React.Component {
 
 }
 
-export default tickerPurchase
+export default TickerPurchase
