@@ -47,8 +47,8 @@ class TickerPurchase extends React.Component {
 
       <h4>${-purchaseCost} USD</h4>
 
-      <p>You have: ${this.props.user.unspent_money.toFixed(2)} USD<br/>
-      This will leave you with: ${(this.props.user.unspent_money + purchaseCost).toFixed(2)} USD</p>
+      <p>You have: <b>${this.props.user.unspent_money.toFixed(2)} USD</b><br/>
+      This will leave you with: <b>${(this.props.user.unspent_money + purchaseCost).toFixed(2)} USD</b></p>
 
       <button onClick={this.purchaseCrypto}>Buy</button>
     </div>)
