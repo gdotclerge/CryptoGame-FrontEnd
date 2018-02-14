@@ -5,7 +5,6 @@ import Login from "./components/login/LogInContainer"
 import Auth from "./authAdapter"
 import Home from "./components/home/HomeContainer"
 // import SignUp from "./components/login/SignUp"
-import './App.css';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 class App extends Component {
