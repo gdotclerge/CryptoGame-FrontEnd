@@ -3,18 +3,40 @@ import HomeHeader from './HomeHeader'
 import HomePortfolio from './HomePortfolio'
 import HomeSearchResults from './HomeSearchResults'
 
-const homeContainer = (props) => {
-  return (
-    <div>
-      <h4>Welcome {props.user.first_name}!</h4>
-      <HomeHeader user={props.user} tickers={props.tickers}/>
-      <input type="text" placeholder="Search"/>
-      <HomePortfolio user={props.user} tickers={props.tickers}/>
-    </div>
-  )
+class HomeContainer extends React.Component {
+
+  state = {
+    filteredSearchTerms: []
+  }
+
+
+
+  render = () => {
+    return (
+      <div>
+        <h4>Welcome {this.props.user.first_name}!</h4>
+        <HomeHeader user={this.props.user} tickers={this.props.tickers}/>
+        <input type="text" placeholder="Search" onChange={this.handleSearch}/>
+        <HomePortfolio user={this.props.user} filteredSearchTerms={this.state.filteredSearchTerms} />
+      </div>
+    )
+  }
+
+  handleSearch = (e) => {
+    console.log(e.target.value)
+    let filteredSearchTerms = this.props.tickers.filter( (t) => {
+      return t.search_term.startsWith(e.target.value.toLowerCase())
+    })
+
+    this.setState({
+      filteredSearchTerms: filteredSearchTerms
+    })
+  }
+
+
 
 
 
 }
 
-export default homeContainer
+export default HomeContainer

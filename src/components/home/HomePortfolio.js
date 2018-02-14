@@ -1,5 +1,5 @@
 import React from 'react'
-import TickerInfo from '../ticker/TickerInfo'
+import TickerSymbol from '../ticker/TickerSymbol'
 
 class HomePortfolio extends React.Component {
 
@@ -14,7 +14,15 @@ class HomePortfolio extends React.Component {
   }
 
   listTickers = () => {
-    return this.userTickers().map( (t)=> {return( <TickerInfo ticker={t}/>) })
+    return this.userTickers().map( (t)=> {return( <TickerSymbol ticker={t}/>) })
+  }
+
+
+  listSearchTickers = () => {
+    console.log(this.props.filteredSearchTerms)
+    return this.props.filteredSearchTerms.map( (ts)=> {
+      return(<TickerSymbol tickerSearchTerm={ts} key={ts}/>)
+    })
   }
 
 
@@ -22,7 +30,7 @@ class HomePortfolio extends React.Component {
     return (
       <div>
         Tickers based on portfolio
-        {this.listTickers()}
+        {this.listSearchTickers()}
       </div>
     )
   }
