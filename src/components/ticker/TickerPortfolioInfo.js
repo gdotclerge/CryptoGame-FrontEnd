@@ -22,10 +22,13 @@ const TickerPortflioInfo = (props) => {
         24hr: { props.tickerInfo.percent_change_24h > 0 ? "+" + props.tickerInfo.percent_change_24h : props.tickerInfo.percent_change_24h }%<br />
         7d: { props.tickerInfo.percent_change_7d > 0 ? "+" + props.tickerInfo.percent_change_7d : props.tickerInfo.percent_change_7d }%<br />
       </p>
-
-      You own <b>{totalCoins} {props.tickerInfo.name}</b>, currently worth:
-
-      <h3>${totalValue} USD</h3>
+      <p>
+        You own <b>{totalCoins} {props.tickerInfo.name}</b>, currently worth:
+      </p>
+        <h3>${totalValue} USD</h3>
+      <p>
+        Investing a total of <b>${props.portfolios[0].purchase_price.toFixed(2)} USD</b>
+      </p>
 
       <button onClick={props.setButtonText}>{props.buttonText} {props.tickerInfo.name}</button><br />
 

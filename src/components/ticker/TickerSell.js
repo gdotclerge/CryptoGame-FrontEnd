@@ -15,7 +15,7 @@ class TickerSell extends React.Component {
 
   render() {
     return (<div>
-      Sell Component
+      <p>Sell Component</p>
     </div>)
   }
 

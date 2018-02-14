@@ -5,7 +5,6 @@ import TickerPortfolioInfo from './TickerPortfolioInfo';
 import TickerPurchase from './TickerPurchase';
 import TickerSell from './TickerSell';
 
-
 class TickerContainer extends React.Component {
   state = {
     tickerInfo: {},

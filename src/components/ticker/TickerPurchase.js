@@ -20,7 +20,7 @@ class TickerPurchase extends React.Component {
         user_id: this.props.user.id,
         ticker_id: this.props.tickerBackEnd.id,
         purchase_amount: this.state.purchaseQty,
-        purchase_price: this.props.tickerInfo.price_usd
+        purchase_price: (this.props.tickerInfo.price_usd * this.state.purchaseQty)
       }
       console.log(newPortfolio)
       Adapter.postNewPortfolio(newPortfolio)
