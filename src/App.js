@@ -6,7 +6,7 @@ import Auth from "./authAdapter"
 import Home from "./components/home/HomeContainer"
 // import SignUp from "./components/login/SignUp"
 import './App.css';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -77,7 +77,9 @@ class App extends Component {
 
   handleLogOut = () => {
     localStorage.removeItem('jwt')
-    this.setState({ isLoggedIn: false, user: {} }, ()=> console.log(this.state.isLoggedIn))
+    this.setState({ isLoggedIn: false, user: {} }, ()=> {
+      console.log("YO GONNA PUSH RN")
+      this.props.history.push('/login')})
   }
 
 
@@ -104,6 +106,18 @@ class App extends Component {
       })
   }
 
+
+  homeButton = () => {
+    if(this.state.userIsLoggedIn){
+      return(<Link to={`/home`}>Home</Link>)
+    }
+  }
+
+  handleHomeClick = () => {
+    console.log("take me home!!")
+  }
+
+
   refreshUser = (user) => {
     if (!user.error) {
       this.setState({
@@ -113,8 +127,10 @@ class App extends Component {
 
   render() {
     console.log("rendered")
+    debugger
     return (
       <div>
+        {this.homeButton()}
         {this.logOutButton()}
         <Switch>
           {this.createTickerPaths()}

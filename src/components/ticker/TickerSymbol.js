@@ -17,7 +17,10 @@ class TickerSymbol extends React.Component {
 
     return (
       <div>
-        <h4 onClick={this.handleTickerClick} >{this.props.tickerSearchTerm.symbol}</h4>
+        <p onClick={this.handleTickerClick} >
+          {this.props.tickerSearchTerm.name} ({this.props.tickerSearchTerm.symbol}) <br/>
+          Ranked: {this.props.tickerSearchTerm.rank}
+        </p>
       </div>
     )
   }
