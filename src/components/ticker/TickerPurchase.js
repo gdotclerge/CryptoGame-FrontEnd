@@ -50,7 +50,7 @@ class TickerPurchase extends React.Component {
       <p>You have: <b>${this.props.user.unspent_money.toFixed(2)} USD</b><br/>
       This will leave you with: <b>${(this.props.user.unspent_money + purchaseCost).toFixed(2)} USD</b></p>
 
-      <button onClick={this.purchaseCrypto}>Buy</button>
+      <p><button onClick={this.purchaseCrypto}>Buy</button></p>
     </div>)
   }
 

@@ -49,7 +49,7 @@ class TickerSell extends React.Component {
         {this.state.sellQty} {this.props.tickerInfo.name} will net you: <b>${netToUser} USD</b><br />
         Increasing your cash to: <b>${(parseFloat(this.props.user.unspent_money) + parseFloat(netToUser)).toFixed(2)} USD</b>
       </p>
-      <button onClick={this.sellCrypto}>Sell</button>
+      <p><button onClick={this.sellCrypto}>Sell</button></p>
     </div>)
   }
 
