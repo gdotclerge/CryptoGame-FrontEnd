@@ -4,13 +4,12 @@ import HomePortfolio from './HomePortfolio'
 import HomeSearchResults from './HomeSearchResults'
 
 const homeContainer = (props) => {
-
-
-
   return (
     <div>
-      <HomeHeader />
-      <HomePortfolio />
+      <h4>Welcome {props.user.first_name}!</h4>
+      <HomeHeader user={props.user} tickers={props.tickers}/>
+      <input type="text" placeholder="Search"/>
+      <HomePortfolio user={props.user} tickers={props.tickers}/>
     </div>
   )
 

@@ -51,7 +51,7 @@ class App extends Component {
   handleLoginSubmit = (e) => {
     e.preventDefault();
     let username = e.target.children[0].value
-    let password = e.target.children[1].value
+    let password = e.target.children[2].value
     this.logIn({username: username, password: password})
   }
 
@@ -120,7 +120,7 @@ class App extends Component {
             } />
           <Route exact path='/home' render={()=>
             {
-              return this.state.userIsLoggedIn ? <Home /> : <Redirect to="/login"/>}
+              return this.state.userIsLoggedIn ? <Home user={this.state.user} tickers={this.state.tickers}/> : <Redirect to="/login"/>}
             } />
           <Route exact path="/login" render={()=>
             {

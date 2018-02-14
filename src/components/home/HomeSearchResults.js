@@ -6,7 +6,7 @@ const homeSearchResults = (props) => {
 
   return (
     <div>
-      Home Son!
+      list that renders based on what is put in the search text
     </div>
   )
 
