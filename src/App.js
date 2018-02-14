@@ -108,7 +108,7 @@ class App extends Component {
     if (!user.error) {
       this.setState({
         user: user
-      })
+      }, console.log("DONE"))
   }}
 
   render() {
