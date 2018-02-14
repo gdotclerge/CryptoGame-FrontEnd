@@ -54,6 +54,12 @@ class TickerContainer extends React.Component {
         inUserPortfolio: true,
         portfolios: portfolios
       })
+    } else {
+      this.setState({
+        inUserPortfolio: false,
+        portfolios: [],
+        buttonText: "Sell"
+      })
     }
   }
 
@@ -73,7 +79,7 @@ class TickerContainer extends React.Component {
         {this.state.buttonText === "Sell" ?
           <TickerPurchase tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user} refreshUser={this.props.refreshUser}/>
             :
-          <TickerSell tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user} refreshUser={this.props.refreshUser}/>
+          <TickerSell tickerBackEnd={this.props.ticker} tickerInfo={this.state.tickerInfo} user={this.props.user} portfolios={this.state.portfolios} refreshUser={this.props.refreshUser}/>
         }
 
       </div>

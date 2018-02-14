@@ -22,7 +22,6 @@ class HomePortfolio extends React.Component {
     return (
       <div>
         Tickers based on portfolio
-        {this.listTickers()}
       </div>
     )
   }

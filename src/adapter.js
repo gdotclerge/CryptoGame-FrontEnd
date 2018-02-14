@@ -55,6 +55,17 @@ class Adapter {
     }).then(res => res.json());
   }
 
+  static updatePortfolio = (portfolio) => {
+    return fetch(`http://localhost:3001/api/v1/portfolios/${portfolio.id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json' // stephen is a hero, application was spelled without the second 'i'
+      },
+      body: JSON.stringify(portfolio)
+    }).then(res => res.json());
+  }
+
 }
 
 

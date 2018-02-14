@@ -3,7 +3,7 @@ import React from 'react'
 const TickerPortflioInfo = (props) => {
 
   console.log(props.portfolios);
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const reducer = (accumulator, currentValue) => accumulator + currentValue
   const totalCoins = props.portfolios.map( p => p.purchase_amount ).reduce(reducer)
   const totalValue = props.portfolios.map( p => p.purchase_amount * props.tickerInfo.price_usd )
     .reduce(reducer).toFixed(2)
@@ -26,9 +26,6 @@ const TickerPortflioInfo = (props) => {
         You own <b>{totalCoins} {props.tickerInfo.name}</b>, currently worth:
       </p>
         <h3>${totalValue} USD</h3>
-      <p>
-        Investing a total of <b>${props.portfolios[0].purchase_price.toFixed(2)} USD</b>
-      </p>
 
       <button onClick={props.setButtonText}>{props.buttonText} {props.tickerInfo.name}</button><br />
 
